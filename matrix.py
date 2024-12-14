@@ -45,9 +45,10 @@ class Matrix:
 
     def trace(self) -> int:
         trace = 0
-        cnt = 0
+        cnt = -1
         for i in range(len(self.row)):
             for j in range(len(self.row[i])):
+                cnt += 1
                 if self.column[cnt] == i:
                     trace += self.value[cnt]
 
@@ -138,11 +139,15 @@ def matrix_traspose(mat: Matrix) -> "Matrix":
     return Matrix(row = row, column = col, value = val, size = (mat.size[1], mat.size[0]))
 
 
-def multi_matrix(first: Matrix, second: Matrix):
+def multi_matrix(first: Matrix, second: Matrix) -> "Matrix":
+    if len(first) != len(second):
+        raise Exception("Разная размерность!")
+
     sec = matrix_traspose(second)
     row = []
     col = []
     val = []
+    
     for i in range(len(first.row)):
         c = []
         v = []
@@ -168,7 +173,28 @@ def multi_matrix(first: Matrix, second: Matrix):
     return Matrix(row = row, value = val, column = col, size = (first.size[0], second.size[1]) )
 
 
-def get_det(mat: Matrix) -> "Matrix":
-    pass
+def get_det(mat: Matrix) -> int:
+    matrix = []
+    cnt = -1
+    tmp = 0
+    d = 0
 
+    for i in range(len(mat.row)):
+        a = 0
+        matrix.append([])
+        for y in range(len(mat.row[i])):
+            cnt += 1
+            while a < mat.column[cnt]:
+                matrix[i].append(0)
+                a += 1
+            matrix[i].append(mat.value[cnt])
 
+    for k in range(n-1):
+         for i in range(k+1, n):
+            tmp = -matrix[i][k] / matrix[k][k]
+            for j in range(n):
+                matrix[i][j] += matrix[k][j] * tmp
+    d = 1
+    for i in range(n):
+        d *= matrix[i][i]
+    return  (d, d != 0) 

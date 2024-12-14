@@ -41,7 +41,7 @@ class MatrixTestCase(unittest.TestCase):
         self.assertEqual(self.ex.test_get_element(1, 1))
 
 
-class SumMatrixTestCase(unittest.TestCase):
+class operationMatrixTestCase(unittest.TestCase):
     def setUp(self):
         data1 = [
             [1, 0], 
@@ -65,38 +65,56 @@ class SumMatrixTestCase(unittest.TestCase):
             [1, 0, 1], 
             [0, 2, 1]
         ]
+        
+        data5 = [
+            [2, 0], 
+            [0, 0], 
+            [2, 2]
+        ]
+
+        data6 = [
+            [1, 0, 1], 
+            [0, 0, 0], 
+            [1, 2, 2]
+        ]
+
+        data7 = [
+            [1, 1, 1], 
+            [1, 1, 1]
+        ]
 
         self.first = Matrix(data = data1)
         self.second = Matrix(data = data2)
         self.third = Matrix(data = data3)
         self.fouth = Matrix(data = data4)
+        self.fith = Matrix(data = data5)
+        self.six = Matrix(data = data6)
+        self.seven = Matrix(data = data7)
 
     def test_normal_matrix(self):
         self.assertEqual(sum_matrix(self.first, self.second), self.third)
 
-
-class MultiMatrixTestCase(unittest.TestCase):
     def test_const(self):
-        pass
+        self.assertEqual(multi_matrix_const(self.first, 2), self.fith)
 
     def test_matrix_matrix(self):
-        pass
+        self.assertEqual(multi_matrix(self.first, self.fouth), self.six)
     
-    def wwrong_matrix(self):
-        pass
+    def test_transpose_matrix(self):
+        self.assertEqual(matrix_transpose(self.seven), self.trird)
 
 
-class MatrixTransposeTestCase(unittest.TestCase):
-    pass
-
-
-
-
-
-
-
-
-
+class MatrixDetTestCase(unittest.TestCase) :
+    def setUp(self):
+        data = [
+            [1, 2, 0],
+            [0, 0, 3],
+            [1, 1, 0]
+        ]
+        self.data = Matrix(data = data)
+    
+    def test_det(self):
+        self.assertEqual(get_det(self.data), (3, True))
 
 
 if __name__ == "__main__":
