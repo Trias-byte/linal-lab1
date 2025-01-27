@@ -1,5 +1,5 @@
 import unittest
-from matrix import Matrix, sum_matrix, transpose_matrix, multiply_matrices, get_det
+from matrix import Matrix, sum_matrix, multi_matrix_const, transpose_matrix, multiply_matrices, get_det
 
 
 class MatrixTestCase(unittest.TestCase):
@@ -94,16 +94,8 @@ class OperationMatrixTestCase(unittest.TestCase):
         self.assertEqual(result.column, self.third.column)
         self.assertEqual(result.value, self.third.value)
 
-    def test_multiply_with_constant(self):
-        result = Matrix(
-            row=self.first.row, 
-            column=self.first.column, 
-            value=[x * 2 for x in self.first.value], 
-            size=self.first.size
-        )
-        self.assertEqual(result.row, self.fifth.row)
-        self.assertEqual(result.column, self.fifth.column)
-        self.assertEqual(result.value, self.fifth.value)
+    def test_const(self):
+        self.assertEqual(multi_matrix_const(self.first, 2), self.fith)
 
     def test_multiply_matrices(self):
         result = multiply_matrices(self.first, self.fourth)

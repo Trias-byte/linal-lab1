@@ -59,11 +59,7 @@ class Matrix:
         a = sum([i for i in range(self.row[r], self.row[r+1]) if self.column[i] == c ])
         return 0 if c not in self.column[self.row[r]:self.row[r+1]] else self.value[a]
 
-def multi_matrix_const(matrix: Matrix, const: int = 1) -> "Matrix":
-    val = []
-    for i in matrix.value:
-        val.append(i*const)
-    return Matrix(row = matrix.row, column = matrix.column, value = val, size = len(matrix))
+
 
 def sum_matrix(first: Matrix, second: Matrix) -> "Matrix":
     if first.size != second.size:
@@ -100,6 +96,11 @@ def sum_matrix(first: Matrix, second: Matrix) -> "Matrix":
 
     return Matrix(row=row, column=column, value=value, size=first.size)
 
+def multi_matrix_const(matrix: Matrix, const: int = 1) -> "Matrix":
+    val = []
+    for i in matrix.value:
+        val.append(i*const)
+    return Matrix(row = matrix.row, column = matrix.column, value = val, size = len(matrix))
 
 def transpose_matrix(mat: Matrix) -> "Matrix":
     row_count, col_count = mat.size
